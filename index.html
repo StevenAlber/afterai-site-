@@ -110,6 +110,66 @@ box-shadow: 0 8px 30px rgba(196, 240, 66, 0.2);
 
 section { background-color: #0a0a0b !important; }
 
+/* ── PROOF BAR (NEW) ── */
+.proof-bar { padding: 48px 0; border-top: 1px solid #2a2a2d; }
+.proof-inner {
+display: flex; justify-content: space-between; align-items: center;
+gap: 32px; flex-wrap: wrap;
+}
+.proof-stat { text-align: center; flex: 1; min-width: 140px; }
+.proof-num {
+font-family: ‘Instrument Serif’, Georgia, serif;
+font-size: 32px; color: #c4f042; line-height: 1; margin-bottom: 6px;
+}
+.proof-label {
+font-size: 12px; color: #5a5a5d;
+font-family: ‘JetBrains Mono’, monospace; letter-spacing: 0.5px;
+}
+
+/* ── DEMO SECTION (NEW) ── */
+.demo-section { padding: 80px 0; border-top: 1px solid #2a2a2d; }
+.demo-grid {
+display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+margin-top: 48px; border: 1px solid #2a2a2d; border-radius: 8px; overflow: hidden;
+}
+.demo-col { padding: 36px 32px; }
+.demo-col.before { background-color: rgba(255, 77, 77, 0.05) !important; border-right: 1px solid #2a2a2d; }
+.demo-col.after { background-color: rgba(196, 240, 66, 0.04) !important; }
+.demo-label {
+font-family: ‘JetBrains Mono’, monospace; font-size: 11px;
+letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
+}
+.demo-col.before .demo-label { color: #ff4d4d; }
+.demo-col.after .demo-label { color: #c4f042; }
+.demo-prompt {
+font-size: 14px; line-height: 1.7; color: #8a8a8d;
+font-family: ‘JetBrains Mono’, monospace; padding: 16px;
+background-color: rgba(0,0,0,0.25) !important; border-radius: 6px;
+border: 1px solid rgba(255,255,255,0.04);
+}
+.demo-col.after .demo-prompt { color: #c0c0c0; }
+.demo-result {
+margin-top: 14px; font-size: 13px; color: #5a5a5d;
+font-family: ‘JetBrains Mono’, monospace; font-style: italic;
+}
+.demo-col.after .demo-result { color: #9abf2e; }
+
+/* ── RISK SECTION (NEW) ── */
+.risk-section { padding: 80px 0; border-top: 1px solid #2a2a2d; }
+.risk-box {
+margin-top: 40px; padding: 36px 32px;
+background-color: #111113 !important;
+border: 1px solid #2a2a2d; border-radius: 8px;
+border-left: 3px solid #c4f042;
+}
+.risk-box p { font-size: 16px; color: #8a8a8d; line-height: 1.7; margin-bottom: 16px; }
+.risk-box p:last-child { margin-bottom: 0; }
+.risk-box strong { color: #e8e6e3; font-weight: 500; }
+.risk-box .highlight {
+color: #c4f042; font-family: ‘JetBrains Mono’, monospace;
+font-size: 13px; letter-spacing: 0.3px;
+}
+
 .anti-pitch { padding: 100px 0 80px; border-top: 1px solid #2a2a2d; }
 .anti-grid {
 display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -195,14 +255,17 @@ footer { padding: 40px 0; border-top: 1px solid #2a2a2d; text-align: center; bac
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 680px) {
-.anti-grid { grid-template-columns: 1fr; }
+.anti-grid, .demo-grid { grid-template-columns: 1fr; }
 .anti-col:first-child { border-right: none; border-bottom: 1px solid #2a2a2d; }
+.demo-col.before { border-right: none; border-bottom: 1px solid #2a2a2d; }
 .who-grid { grid-template-columns: 1fr; }
 .fw-grid { grid-template-columns: 1fr; }
 .timeline-grid { grid-template-columns: 1fr; }
 .module { grid-template-columns: 40px 1fr; gap: 16px; }
 .cta-box { padding: 36px 28px; width: 100%; }
 nav { padding: 14px 20px; }
+.proof-inner { flex-direction: column; gap: 20px; }
+.proof-stat { min-width: auto; }
 }
 </style>
 
@@ -225,6 +288,49 @@ nav { padding: 14px 20px; }
         <span class="price-tag">$19</span>
       </a>
       <span class="hero-meta">20 pages &middot; 4 modules &middot; 3 frameworks &middot; templates included</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEW: PROOF BAR ── -->
+
+<section class="proof-bar reveal">
+  <div class="container">
+    <div class="proof-inner">
+      <div class="proof-stat">
+        <div class="proof-num">77%</div>
+        <div class="proof-label">of employers plan AI reskilling</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">4%</div>
+        <div class="proof-label">of workers have received any</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">45 min</div>
+        <div class="proof-label">to close the gap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEW: BEFORE / AFTER DEMO ── -->
+
+<section class="demo-section">
+  <div class="container">
+    <div class="section-label reveal">The difference</div>
+    <div class="section-title reveal">Same AI. Different results.</div>
+    <p class="section-desc reveal">The gap between average and strategic AI use isn't about tools. It's about how you think.</p>
+    <div class="demo-grid reveal">
+      <div class="demo-col before">
+        <div class="demo-label">How most people use AI</div>
+        <div class="demo-prompt">"Summarize this document."</div>
+        <div class="demo-result">&rarr; Generic output. Copy-paste. Forgettable.</div>
+      </div>
+      <div class="demo-col after">
+        <div class="demo-label">After reading this kit</div>
+        <div class="demo-prompt">"You're a senior analyst briefing a CEO who has 3 minutes. She cares about market risk and margin impact. Summarize through that lens."</div>
+        <div class="demo-result">&rarr; Sharp. Contextual. Decision-ready.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -361,6 +467,21 @@ nav { padding: 14px 20px; }
   </div>
 </section>
 
+<!-- ── NEW: THE REAL RISK ── -->
+
+<section class="risk-section" style="padding: 80px 0; border-top: 1px solid #2a2a2d;">
+  <div class="container">
+    <div class="section-label reveal">The real risk</div>
+    <div class="section-title reveal">It's not what you think</div>
+    <div class="risk-box reveal">
+      <p>The danger isn't that AI will take your job tomorrow.</p>
+      <p>The danger is that over the next 2&ndash;3 years, <strong>someone in your field will figure out how to do in 2 hours what currently takes you 2 days.</strong></p>
+      <p>If that person isn't you, you have a problem.</p>
+      <p class="highlight">This kit exists so that person is you.</p>
+    </div>
+  </div>
+</section>
+
 <section class="quote-section">
   <div class="container reveal">
     <blockquote>"This isn't education.<br>This is <span>professional self-defense.</span>"</blockquote>
@@ -387,6 +508,11 @@ nav { padding: 14px 20px; }
     <div class="faq-item reveal">
       <div class="faq-q">What if it's not for me?</div>
       <div class="faq-a">30-day money-back guarantee, no questions asked. If the frameworks don't change how you work, you get your $19 back.</div>
+    </div>
+    <!-- ── NEW: WHY $19 FAQ ── -->
+    <div class="faq-item reveal">
+      <div class="faq-q">Why only $19?</div>
+      <div class="faq-a">Because the three frameworks in Module 3 alone would cost $500+ in a consulting session. And because $19 is less than one wrong decision costs you. We'd rather everyone can afford professional self-defense.</div>
     </div>
   </div>
 </section>
