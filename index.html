@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>After AI — The Professional Survival Kit</title>
+<meta name="description" content="AI won't replace you. But someone who uses it better will. A 45-minute framework that actually changes how you work. $19.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–bg: #0a0a0b;
+–bg-elevated: #111113;
+–bg-card: #161618;
+–text: #e8e6e3;
+–text-dim: #8a8a8d;
+–text-muted: #5a5a5d;
+–accent: #c4f042;
+–accent-dim: #9abf2e;
+–red: #ff4d4d;
+–border: #2a2a2d;
+–serif: ‘Instrument Serif’, Georgia, serif;
+–sans: ‘DM Sans’, -apple-system, sans-serif;
+–mono: ‘JetBrains Mono’, ‘Courier New’, monospace;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: var(–sans);
+line-height: 1.65;
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+}
+
+::selection {
+background: var(–accent);
+color: var(–bg);
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.03’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 9999;
+}
+
+/* ─── LAYOUT ─── */
+.container {
+max-width: 720px;
+margin: 0 auto;
+padding: 0 24px;
+}
+
+/* ─── NAV ─── */
+nav {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 100;
+padding: 16px 24px;
+background: rgba(10, 10, 11, 0.85);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(255,255,255,0.04);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.nav-logo {
+font-family: var(–mono);
+font-size: 14px;
+font-weight: 500;
+color: var(–text-dim);
+letter-spacing: 0.5px;
+}
+
+.nav-logo span { color: var(–accent); }
+
+.nav-price {
+font-family: var(–mono);
+font-size: 13px;
+color: var(–text-muted);
+}
+
+.nav-price strong {
+color: var(–text);
+font-weight: 500;
+}
+
+/* ─── HERO ─── */
+.hero {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding-top: 80px;
+padding-bottom: 60px;
+position: relative;
+}
+
+.hero-overline {
+font-family: var(–mono);
+font-size: 12px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–accent);
+margin-bottom: 28px;
+opacity: 0;
+animation: fadeUp 0.8s ease forwards;
+}
+
+.hero h1 {
+font-family: var(–serif);
+font-size: clamp(42px, 8vw, 72px);
+font-weight: 400;
+line-height: 1.08;
+color: var(–text);
+margin-bottom: 32px;
+opacity: 0;
+animation: fadeUp 0.8s ease 0.15s forwards;
+}
+
+.hero h1 em {
+font-style: italic;
+color: var(–accent);
+}
+
+.hero-sub {
+font-size: 19px;
+line-height: 1.6;
+color: var(–text-dim);
+max-width: 540px;
+margin-bottom: 48px;
+opacity: 0;
+animation: fadeUp 0.8s ease 0.3s forwards;
+}
+
+.hero-cta-group {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: 20px;
+opacity: 0;
+animation: fadeUp 0.8s ease 0.45s forwards;
+}
+
+.btn-primary {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 16px 36px;
+background: var(–accent);
+color: var(–bg);
+font-family: var(–sans);
+font-size: 15px;
+font-weight: 600;
+text-decoration: none;
+border-radius: 6px;
+transition: all 0.2s ease;
+border: none;
+cursor: pointer;
+}
+
+.btn-primary:hover {
+background: #d4ff4a;
+transform: translateY(-1px);
+box-shadow: 0 8px 30px rgba(196, 240, 66, 0.2);
+}
+
+.btn-primary .price-tag {
+font-family: var(–mono);
+font-size: 13px;
+opacity: 0.7;
+}
+
+.hero-meta {
+font-size: 13px;
+color: var(–text-muted);
+font-family: var(–mono);
+}
+
+/* ─── ANTI-PITCH ─── */
+.anti-pitch {
+padding: 100px 0 80px;
+border-top: 1px solid var(–border);
+}
+
+.anti-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0;
+margin-top: 48px;
+border: 1px solid var(–border);
+border-radius: 8px;
+overflow: hidden;
+}
+
+.anti-col {
+padding: 36px 32px;
+}
+
+.anti-col:first-child {
+background: rgba(255, 77, 77, 0.04);
+border-right: 1px solid var(–border);
+}
+
+.anti-col:last-child {
+background: rgba(196, 240, 66, 0.03);
+}
+
+.anti-col h3 {
+font-family: var(–mono);
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 24px;
+}
+
+.anti-col:first-child h3 { color: var(–red); }
+.anti-col:last-child h3 { color: var(–accent); }
+
+.anti-item {
+font-size: 15px;
+color: var(–text-dim);
+padding: 10px 0;
+border-bottom: 1px solid rgba(255,255,255,0.04);
+display: flex;
+align-items: flex-start;
+gap: 10px;
+line-height: 1.5;
+}
+
+.anti-item:last-child { border-bottom: none; }
+
+.anti-item .icon {
+flex-shrink: 0;
+margin-top: 2px;
+font-size: 14px;
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-label {
+font-family: var(–mono);
+font-size: 11px;
+letter-spacing: 2.5px;
+text-transform: uppercase;
+color: var(–accent);
+margin-bottom: 20px;
+}
+
+.section-title {
+font-family: var(–serif);
+font-size: clamp(30px, 5vw, 44px);
+font-weight: 400;
+line-height: 1.15;
+margin-bottom: 20px;
+}
+
+.section-desc {
+font-size: 17px;
+color: var(–text-dim);
+max-width: 560px;
+line-height: 1.6;
+}
+
+/* ─── WHO ─── */
+.who-section {
+padding: 80px 0;
+border-top: 1px solid var(–border);
+}
+
+.who-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+margin-top: 48px;
+}
+
+.who-card {
+padding: 20px 24px;
+background: var(–bg-elevated);
+border: 1px solid var(–border);
+border-radius: 6px;
+font-size: 15px;
+color: var(–text-dim);
+transition: all 0.2s ease;
+}
+
+.who-card:hover {
+border-color: rgba(196, 240, 66, 0.3);
+color: var(–text);
+}
+
+.who-card .role {
+display: block;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 4px;
+}
+
+/* ─── MODULES ─── */
+.modules-section {
+padding: 100px 0;
+border-top: 1px solid var(–border);
+}
+
+.module {
+padding: 36px 0;
+border-bottom: 1px solid var(–border);
+display: grid;
+grid-template-columns: 56px 1fr;
+gap: 24px;
+align-items: start;
+}
+
+.module:first-of-type { border-top: 1px solid var(–border); margin-top: 48px; }
+
+.module-num {
+font-family: var(–serif);
+font-size: 36px;
+font-style: italic;
+color: var(–accent);
+line-height: 1;
+padding-top: 4px;
+}
+
+.module-title {
+font-family: var(–serif);
+font-size: 24px;
+font-weight: 400;
+margin-bottom: 8px;
+line-height: 1.3;
+}
+
+.module-subtitle {
+font-family: var(–mono);
+font-size: 12px;
+color: var(–accent-dim);
+letter-spacing: 0.5px;
+margin-bottom: 12px;
+}
+
+.module-desc {
+font-size: 15px;
+color: var(–text-dim);
+line-height: 1.6;
+}
+
+/* ─── FRAMEWORKS ─── */
+.frameworks-section {
+padding: 80px 0;
+border-top: 1px solid var(–border);
+}
+
+.fw-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
+margin-top: 48px;
+}
+
+.fw-card {
+background: var(–bg-card);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 32px 24px;
+transition: all 0.25s ease;
+}
+
+.fw-card:hover {
+border-color: var(–accent);
+transform: translateY(-2px);
+}
+
+.fw-icon {
+font-family: var(–mono);
+font-size: 28px;
+margin-bottom: 16px;
+display: block;
+}
+
+.fw-card h4 {
+font-family: var(–serif);
+font-size: 20px;
+font-weight: 400;
+margin-bottom: 10px;
+line-height: 1.3;
+}
+
+.fw-card p {
+font-size: 14px;
+color: var(–text-dim);
+line-height: 1.55;
+}
+
+/* ─── QUOTE BLOCK ─── */
+.quote-section {
+padding: 100px 0;
+border-top: 1px solid var(–border);
+text-align: center;
+}
+
+.quote-section blockquote {
+font-family: var(–serif);
+font-size: clamp(26px, 4.5vw, 40px);
+font-weight: 400;
+font-style: italic;
+line-height: 1.35;
+max-width: 620px;
+margin: 0 auto 24px;
+color: var(–text);
+}
+
+.quote-section blockquote span {
+color: var(–accent);
+}
+
+.quote-attr {
+font-family: var(–mono);
+font-size: 12px;
+color: var(–text-muted);
+letter-spacing: 1px;
+}
+
+/* ─── CTA FINAL ─── */
+.cta-section {
+padding: 100px 0 120px;
+border-top: 1px solid var(–border);
+text-align: center;
+}
+
+.cta-section .section-title {
+max-width: 500px;
+margin: 0 auto 16px;
+}
+
+.cta-section .section-desc {
+margin: 0 auto 48px;
+text-align: center;
+max-width: 480px;
+}
+
+.cta-box {
+display: inline-flex;
+flex-direction: column;
+align-items: center;
+gap: 16px;
+padding: 48px 64px;
+background: var(–bg-elevated);
+border: 1px solid var(–border);
+border-radius: 12px;
+position: relative;
+}
+
+.cta-box::before {
+content: ‘’;
+position: absolute;
+inset: -1px;
+border-radius: 13px;
+background: linear-gradient(135deg, rgba(196,240,66,0.15), transparent 50%);
+z-index: -1;
+}
+
+.cta-price {
+display: flex;
+align-items: baseline;
+gap: 8px;
+}
+
+.cta-price .amount {
+font-family: var(–serif);
+font-size: 56px;
+font-weight: 400;
+color: var(–text);
+line-height: 1;
+}
+
+.cta-price .currency {
+font-family: var(–mono);
+font-size: 18px;
+color: var(–text-muted);
+}
+
+.cta-detail {
+font-size: 14px;
+color: var(–text-muted);
+}
+
+.cta-guarantee {
+font-family: var(–mono);
+font-size: 12px;
+color: var(–text-muted);
+margin-top: 12px;
+letter-spacing: 0.3px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+padding: 40px 0;
+border-top: 1px solid var(–border);
+text-align: center;
+}
+
+.footer-brand {
+font-family: var(–mono);
+font-size: 12px;
+color: var(–text-muted);
+letter-spacing: 0.5px;
+}
+
+.footer-brand a {
+color: var(–text-dim);
+text-decoration: none;
+}
+
+.footer-brand a:hover { color: var(–accent); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 680px) {
+.anti-grid {
+grid-template-columns: 1fr;
+}
+.anti-col:first-child {
+border-right: none;
+border-bottom: 1px solid var(–border);
+}
+.who-grid {
+grid-template-columns: 1fr;
+}
+.fw-grid {
+grid-template-columns: 1fr;
+}
+.module {
+grid-template-columns: 40px 1fr;
+gap: 16px;
+}
+.cta-box {
+padding: 36px 28px;
+width: 100%;
+}
+nav {
+padding: 14px 20px;
+}
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">after<span>ai</span>.me</div>
+  <div class="nav-price"><strong>$19</strong> — one time</div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-overline">The Professional Survival Kit</div>
+    <h1>AI won't replace&nbsp;you.<br>But someone <em>using it</em>&nbsp;will.</h1>
+    <p class="hero-sub">A 45-minute framework for professionals who think for a living. Not prompts. Not hype. A clear system for staying irreplaceable.</p>
+    <div class="hero-cta-group">
+      <a href="#buy" class="btn-primary">
+        Get the Kit
+        <span class="price-tag">$19</span>
+      </a>
+      <span class="hero-meta">45 min · PDF + frameworks · Instant access</span>
+    </div>
+  </div>
+</section>
+
+<!-- ANTI-PITCH -->
+
+<section class="anti-pitch">
+  <div class="container">
+    <div class="section-label reveal">Honest disclaimer</div>
+    <div class="section-title reveal">This is not another AI course.</div>
+    <div class="anti-grid reveal">
+      <div class="anti-col">
+        <h3>This is not</h3>
+        <div class="anti-item"><span class="icon">✕</span> "What is ChatGPT" for beginners</div>
+        <div class="anti-item"><span class="icon">✕</span> Prompt engineering tricks</div>
+        <div class="anti-item"><span class="icon">✕</span> Become an AI expert in 7 days</div>
+        <div class="anti-item"><span class="icon">✕</span> Hype, guru energy, or magic bullets</div>
+        <div class="anti-item"><span class="icon">✕</span> A subscription you'll forget about</div>
+      </div>
+      <div class="anti-col">
+        <h3>This is</h3>
+        <div class="anti-item"><span class="icon">→</span> A thinking framework for working with AI</div>
+        <div class="anti-item"><span class="icon">→</span> 3 structures you can use on Monday</div>
+        <div class="anti-item"><span class="icon">→</span> Why roles change but don't disappear</div>
+        <div class="anti-item"><span class="icon">→</span> Honest, no-bullshit, 45 minutes</div>
+        <div class="anti-item"><span class="icon">→</span> One payment, yours forever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+
+<section class="who-section">
+  <div class="container">
+    <div class="section-label reveal">Who this is for</div>
+    <div class="section-title reveal">People whose job is <em style="font-family:var(--serif);font-style:italic;color:var(--accent)">thinking</em></div>
+    <p class="section-desc reveal">If your work involves analysis, strategy, writing, or decisions — and you've felt the ground shifting — this is built for you.</p>
+    <div class="who-grid reveal">
+      <div class="who-card"><span class="role">Lawyers</span>who draft, review, argue</div>
+      <div class="who-card"><span class="role">Analysts</span>who model, forecast, interpret</div>
+      <div class="who-card"><span class="role">Consultants</span>who structure, advise, present</div>
+      <div class="who-card"><span class="role">Journalists</span>who research, verify, write</div>
+      <div class="who-card"><span class="role">Project managers</span>who coordinate, prioritize, decide</div>
+      <div class="who-card"><span class="role">Policy advisors</span>who analyze, recommend, communicate</div>
+      <div class="who-card"><span class="role">Researchers</span>who synthesize, review, publish</div>
+      <div class="who-card"><span class="role">Strategists</span>who plan, position, anticipate</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+
+<section class="modules-section">
+  <div class="container">
+    <div class="section-label reveal">What's inside</div>
+    <div class="section-title reveal">Four modules. Zero filler.</div>
+    <p class="section-desc reveal">Each module is standalone. Use one. Use all four. The frameworks work immediately.</p>
+
+```
+<div class="module reveal">
+  <div class="module-num">1</div>
+  <div>
+    <div class="module-title">The Real AI Shift</div>
+    <div class="module-subtitle">Why tasks disappear, but roles don't — unless you let them.</div>
+    <div class="module-desc">Which jobs are actually at risk (honestly). Why "AI will take your job" is both true and completely wrong. The difference between people who get replaced and people who become more valuable.</div>
+  </div>
+</div>
+
+<div class="module reveal">
+  <div class="module-num">2</div>
+  <div>
+    <div class="module-title">How Smart People Use AI Differently</div>
+    <div class="module-subtitle">Not prompts. Structures.</div>
+    <div class="module-desc">Why prompt engineering is already outdated. How to give AI a role, not a command. The mental shift from "asking questions" to "thinking with a partner" — and why it changes everything.</div>
+  </div>
+</div>
+
+<div class="module reveal">
+  <div class="module-num">3</div>
+  <div>
+    <div class="module-title">3 Frameworks That Actually Work</div>
+    <div class="module-subtitle">Copy-paste ready. Battle-tested.</div>
+    <div class="module-desc">AI as Second Brain — organize and retrieve what you know. AI as Red Team — find the holes in your own thinking. AI as Compression Engine — turn 50 pages into one clear decision. Each with concrete examples and ready-to-use templates.</div>
+  </div>
+</div>
+
+<div class="module reveal">
+  <div class="module-num">4</div>
+  <div>
+    <div class="module-title">What to Do This Week</div>
+    <div class="module-subtitle">3 habits to start. 1 thing to stop.</div>
+    <div class="module-desc">No theory. Three concrete things to do differently starting Monday. One thing to stop doing immediately. One experiment that will show you the difference within a day.</div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- FRAMEWORKS PREVIEW -->
+
+<section class="frameworks-section">
+  <div class="container">
+    <div class="section-label reveal">The three frameworks</div>
+    <div class="section-title reveal">Think with AI, not at&nbsp;it</div>
+    <div class="fw-grid reveal">
+      <div class="fw-card">
+        <span class="fw-icon">🧠</span>
+        <h4>Second Brain</h4>
+        <p>AI remembers everything you've ever thought. Learn to use it as an extension of your mind, not a search engine.</p>
+      </div>
+      <div class="fw-card">
+        <span class="fw-icon">⚔️</span>
+        <h4>Red Team</h4>
+        <p>Before anyone else finds the flaw in your argument, AI already did. The most powerful 3-minute stress test you'll ever use.</p>
+      </div>
+      <div class="fw-card">
+        <span class="fw-icon">◆</span>
+        <h4>Compression Engine</h4>
+        <p>Turn 80 pages of research into one sharp paragraph. Not summarization — distillation. The skill that makes you faster than a team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+
+<section class="quote-section">
+  <div class="container reveal">
+    <blockquote>"This isn't education.<br>This is <span>professional self-defense.</span>"</blockquote>
+    <div class="quote-attr">— THE PRINCIPLE BEHIND AFTER AI</div>
+  </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta-section" id="buy">
+  <div class="container">
+    <div class="section-label reveal">Get the kit</div>
+    <div class="section-title reveal">Cheaper than one wrong decision.</div>
+    <p class="section-desc reveal">45 minutes. 4 modules. 3 frameworks you'll use every day. Instant PDF access.</p>
+    <div class="cta-box reveal">
+      <div class="cta-price">
+        <span class="amount">$19</span>
+        <span class="currency">USD</span>
+      </div>
+      <div class="cta-detail">One-time payment · Instant access · No subscription</div>
+      <a href="#" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px 40px;">
+        Get After AI Now
+      </a>
+      <div class="cta-guarantee">30-day money-back guarantee · No questions asked</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">
+      afterai.me · Built by <a href="https://kryonis.global" target="_blank">KRYONIS</a> · 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
